@@ -8,42 +8,38 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome To My App"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:textStyle="bold"
+        style="@style/welcomeHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="105dp" />
+        tools:layout_editor_absoluteY="105dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="333dp"
-        android:layout_height="82dp"
-        android:gravity="center"
-        android:text="This tutorial video will show you how to create simple android material Modern Dashboard and login and sign page with Adobe XD and XML code."
-        android:textColor="@color/black"
+        style="@style/welcomeDesc"
+        tools:ignore="MissingConstraints,TextSizeCheck"
         tools:layout_editor_absoluteX="37dp"
         tools:layout_editor_absoluteY="654dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:g
-        android:text="Get Started"
+        android:layout_height="48dp"
+        android:background="@drawable/round_button_background"
+        android:paddingHorizontal="25dp"
+        android:text="@string/started"
         android:textAllCaps="false"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="751dp" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="750dp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="414dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="339dp"
+        android:layout_height="411dp"
+        android:layout_marginEnd="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/hello"
-        tools:layout_editor_absoluteY="195dp" />
+        tools:layout_editor_absoluteY="176dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
