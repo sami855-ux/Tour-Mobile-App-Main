@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="welcomeHeader">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:fontFamily">@font/poppinsbold</item>
+        <item name="android:textStyle">bold</item>
+        <item name= "android:text">@string/Welcome</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="welcomeDesc">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textStyle">normal</item>
+        <item name= "android:text">@string/welcom_desc</item>
+        <item name="android:layout_width">333dp</item>
+        <item name="android:layout_height">82dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>
