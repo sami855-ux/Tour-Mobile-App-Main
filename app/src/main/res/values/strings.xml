@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Assignment-Gr</string>
     <string name="Welcome">Welcome To My App</string>
-    <string name="welcom_desc">This tutorial video will show you how to create simple android material Modern Dashboard and login and sign page with Adobe XD and XML code.</string>
+    <string name="login">Login</string>
+    <string name="started">Get Started</string>
+    <string name="welcom_desc">This tutorial video will show you how to create simple android material Modern Dashboard and login.</string>
 </resources>
