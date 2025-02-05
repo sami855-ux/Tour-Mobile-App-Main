@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/image"
     android:padding="16dp">
 
     <TextView
@@ -14,14 +15,14 @@
         android:fontFamily="@font/poppinsbold"
         android:text="Register"
         android:textSize="28sp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/textView6"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="All fields are required"
-        android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_marginBottom="15dp"/>
 
@@ -83,6 +84,7 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:text="By checking the box you are agreeing with us" />
 
     <Button
@@ -90,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-    android:textAllCaps="false" />
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/back_to_login"
