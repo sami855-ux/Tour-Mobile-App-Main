@@ -1,5 +1,6 @@
 package com.example.assignment_gr;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,7 +15,7 @@ public class dbconnect extends SQLiteOpenHelper {
     private static String tablename = "users";
     private static int version = 1;
 
-    private static String id = "id";
+    public static String id = "id";
     private static String username = "username";
     private static String email = "email";
     private static String password = "password";
@@ -95,6 +96,55 @@ public class dbconnect extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return null; // Return null if no user is found
+    }
+    public boolean deleteUser(int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            int rowsDeleted = db.delete(tablename, id + " = ?", new String[]{String.valueOf(userId)});
+            return rowsDeleted > 0;
+        } finally {
+            db.close();
+        }
+    }
+
+    public boolean updateUser(int userId, String newUsername, String newEmail, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("username", newUsername);
+        values.put("email", newEmail);
+        values.put("password", newPassword);
+
+        // Update query
+        int rowsAffected = db.update(tablename, values, id + " = ?", new String[]{String.valueOf(userId)});
+
+        db.close();
+        return rowsAffected > 0; // Returns true if update was successful
+    }
+
+    public User getUserById(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        User user = null;
+
+        try {
+            cursor = db.rawQuery("SELECT * FROM " + tablename + " WHERE " + id + " = ?",
+                    new String[]{String.valueOf(userId)});
+
+            if (cursor.moveToFirst()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+                String password = cursor.getString(cursor.getColumnIndexOrThrow("password"));
+
+                user = new User(id, username, email, password); // Create User object
+            }
+        } finally {
+            if (cursor != null) cursor.close();
+            db.close();
+        }
+
+        return user; // Returns user if found, otherwise null
     }
 
 }
