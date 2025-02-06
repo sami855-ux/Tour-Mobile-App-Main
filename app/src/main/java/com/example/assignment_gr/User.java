@@ -52,4 +52,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public boolean deleteUserById(dbconnect dbHelper, int userId) {
+        return dbHelper.deleteUser(userId);
+    }
+
 }
