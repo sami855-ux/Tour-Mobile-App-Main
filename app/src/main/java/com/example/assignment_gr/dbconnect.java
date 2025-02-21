@@ -13,28 +13,67 @@ public class dbconnect extends SQLiteOpenHelper {
 
     private static String dbname = "myDatabase";
     private static String tablename = "users";
+    private static String hotelTable = "hotels";
     private static int version = 1;
 
     public static String id = "id";
     private static String username = "username";
     private static String email = "email";
     private static String password = "password";
+    // Hotel table columns
+    private static String hotelId = "hotel_id";
+    private static String hotelName = "hotel_name";
+    private static String positionName = "position_name";
+    private static String userIdFk = "user_id";
     public dbconnect(@Nullable Context context) {
         super(context, dbname, null, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "create table "+tablename+"("+id+" integer primary key autoincrement,"+username+" text,"+email+" text,"+password+" text);";
-
+        // Create users table
+        String query = "CREATE TABLE " + tablename + " (" +
+                id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                username + " TEXT, " +
+                email + " TEXT, " +
+                password + " TEXT);";
         db.execSQL(query);
+
+        // Create hotels table (linked to users via user_id)
+        String hotelQuery = "CREATE TABLE " + hotelTable + " (" +
+                hotelId + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                hotelName + " TEXT, " +
+                positionName + " TEXT, " +
+                userIdFk + " INTEGER, " +
+                "FOREIGN KEY(" + userIdFk + ") REFERENCES " + tablename + "(" + id + "));";
+        db.execSQL(hotelQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    db.execSQL("drop table if exists "+tablename);
+        db.execSQL("DROP TABLE IF EXISTS " + tablename);
+        db.execSQL("DROP TABLE IF EXISTS " + hotelTable);
+        onCreate(db);
+    }
 
-    onCreate(db);
+    // Add a new hotel for a user
+    public boolean addHotel(int userId, String hotelName, String positionName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(userIdFk, userId);  // Link hotel to user by userId
+        values.put(hotelName, hotelName);
+        values.put(positionName, positionName);
+
+        long result = db.insert(hotelTable, null, values);
+        db.close();
+        return result != -1;  // Return true if insertion is successful
+    }
+
+    // List all hotels for a specific user
+    public Cursor getHotelsForUser(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + hotelTable + " WHERE " + userIdFk + " = ?";
+        return db.rawQuery(query, new String[]{String.valueOf(userId)});
     }
 
     public boolean addUser(User user) {

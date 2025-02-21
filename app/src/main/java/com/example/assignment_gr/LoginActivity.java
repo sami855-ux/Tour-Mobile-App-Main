@@ -1,6 +1,7 @@
 package com.example.assignment_gr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private Button loginBtn;
     private dbconnect databaseHelper;
+    private SessionManager sessionManager;
+    public Integer userId;
+    public  String userEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,19 +52,48 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        if(!isValidEmail(email)) {
+            Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         User user = databaseHelper.authenticateUser(email, password); // Call the authenticateUser method
+
 
         if (user != null) {
             // Successfully authenticated
+            sessionManager = new SessionManager(this);
+            userId = user.getId();
+            userEmail = email;
+            sessionManager.createLoginSession(userEmail);
+
+            SharedPreferences sharedPreferences = this.getSharedPreferences("UserSession", this.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("user_id", userId); // Store the user ID
+            editor.apply();
+
+
             Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
             // Proceed to next activity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class); // Replace HomeActivity with your main activity
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish(); // Close the LoginActivity
+
+            // Clear the EditText fields
+            emailEditText.setText("");
+            passwordEditText.setText("");
         } else {
             // Authentication failed
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public boolean isValidEmail(String email) {
+        // Regular expression for validating an email
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        // Check if the input email matches the pattern
+        return email != null && email.matches(emailPattern);
     }
 
 }

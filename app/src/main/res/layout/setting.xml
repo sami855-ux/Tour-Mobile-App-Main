@@ -114,14 +114,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/textView9"
+        <ListView
+            android:id="@+id/hotel_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:fontFamily="@font/poppinsbold"
-            android:text="Booked Places"
-            android:textSize="25sp" />
+            android:layout_height="400dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:scrollbars="none"
+            android:fontFamily="@font/poppinsregular"/>
     </LinearLayout>
 </LinearLayout>

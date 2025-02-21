@@ -55,31 +55,43 @@ public class RegisterActivity extends AppCompatActivity {
 
                     errormsgTextView.setText("All fields are required");
                 } else {
-                    if(checkBox.isChecked()) {
-                        username = username.trim();
-                        email = email.trim();
-                        password = password.trim();
+                    if(!isValidEmail(email)) {
+                        Toast.makeText(RegisterActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        if(checkBox.isChecked()) {
+                            username = username.trim();
+                            email = email.trim();
+                            password = password.trim();
 
-                        User newUser = new User(username, email, password); // Create User object
-                        boolean isInserted = databaseHelper.addUser(newUser); // Insert into database
+                            User newUser = new User(username, email, password); // Create User object
+                            boolean isInserted = databaseHelper.addUser(newUser); // Insert into database
 
-                        if (isInserted) {
-                            Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                            if (isInserted) {
+                                Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
-                            // Navigate to LoginActivity
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
+                                // Navigate to LoginActivity
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Checkbox is not checked", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Checkbox is not checked", Toast.LENGTH_SHORT).show();
                     }
 
                 }
             }
         });
 
+    }
+    public boolean isValidEmail(String email) {
+        // Regular expression for validating an email
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+        // Check if the input email matches the pattern
+        return email != null && email.matches(emailPattern);
     }
 }

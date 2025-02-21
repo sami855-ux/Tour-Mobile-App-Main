@@ -26,6 +26,7 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".UpdateUser"/>
         <activity android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>

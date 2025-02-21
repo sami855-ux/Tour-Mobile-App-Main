@@ -1,5 +1,7 @@
 package com.example.assignment_gr;
 
+import java.util.List;
+
 public class User {
 
     private int id;
@@ -7,6 +9,7 @@ public class User {
     private String email;
     private String password;
 
+    private List<Hotel> hotels;
 
     public User(int id, String username, String email, String password) {
         this.id = id;
@@ -19,6 +22,10 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public void addHotel(String hotelName, String positionName) {
+        hotels.add(new Hotel(hotelName, positionName));
     }
 
     public String getUsername() {

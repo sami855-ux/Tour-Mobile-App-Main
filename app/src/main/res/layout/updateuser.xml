@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Information"
+        android:fontFamily="@font/poppinssemibold"
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feel free to edit some contents to your profile, Happy editing."
+        android:fontFamily="@font/poppinsregular"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:fontFamily="@font/poppinsregular"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/updateusername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="samuel"
+        android:minHeight="48dp"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:fontFamily="@font/poppinsregular"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/updateemailname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="samitale@gmail.com"
+        android:minHeight="48dp"
+        android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:fontFamily="@font/poppinsregular"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/updatepasswordname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="pass1234"
+        android:minHeight="48dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Profile"
+        android:layout_marginTop="35dp"/>
+
+    <Button
+        android:id="@+id/cancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancle" />
+</LinearLayout>

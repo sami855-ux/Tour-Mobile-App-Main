@@ -9,12 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingFragment extends Fragment {
     private Button btnLogout, btnDelete, btnEdit;
@@ -22,7 +28,8 @@ public class SettingFragment extends Fragment {
     private dbconnect dbHelper;
     private  SessionManager sessionManager;
     private Integer userId;
-    private User user;
+    public User user;
+    private ListView hotelListView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,7 +41,23 @@ public class SettingFragment extends Fragment {
         username = view.findViewById(R.id.username);
         userEmail = view.findViewById(R.id.userEmail);
         userLocation = view.findViewById(R.id.userLocation);
+        // Initialize the ListView
+        hotelListView = view.findViewById(R.id.hotel_list_view); // Assuming the ListView has this ID in activity_hotel_list.xml
 
+        // Sample list of hotel locations
+        List<String> hotelLocations = new ArrayList<>();
+
+        HotelAdapter hotelAdapter = new HotelAdapter(getContext(), hotelLocations);
+        hotelListView.setAdapter(hotelAdapter);
+
+        int userId = getLoggedInUserId(requireContext());
+
+        if (userId != -1) { // Check if a valid user ID was found
+            dbconnect dbHelper = new dbconnect(requireContext());
+            user = dbHelper.getUserById(userId);
+        }
+        username.setText(String.valueOf(user.getUsername()));
+        userEmail.setText(String.valueOf(user.getEmail()));
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,20 +78,15 @@ public class SettingFragment extends Fragment {
             }
         });
 
-//        btnEdit.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                    }
-//        );
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UpdateUser.class);
+                startActivity(intent);
+            }
+        });
 
-        int userId = getLoggedInUserId(requireContext());
 
-        if (userId != -1) { // Check if a valid user ID was found
-            dbconnect dbHelper = new dbconnect(requireContext());
-            user = dbHelper.getUserById(userId);
-        }
-        username.setText(String.valueOf(user.getUsername()));
-        userEmail.setText(String.valueOf(user.getEmail()));
         return view;
     }
 
