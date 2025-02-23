@@ -97,11 +97,13 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="270dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/axum" />
 
+
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/descriptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -114,22 +116,30 @@
         android:id="@+id/mainDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="The method returns true if the insertion is successful (i.e., result != -1) and false otherwise. This is correct behavior.Potential Improvements :
-Use constants for table name and column names to improve maintainability.Add more descriptive comments for clarity.
-Consider throwing a custom exception instead of returning false in case of an error." />
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="Rating"
+        android:textSize="20sp" />
 
     <RatingBar
         android:id="@+id/ratingBar"
         style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:isIndicator="true"
-        android:numStars="4"
-        android:stepSize="1"
+        android:stepSize="1" />
 
-        />
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="out of this start review" />
 
 
     <LinearLayout
