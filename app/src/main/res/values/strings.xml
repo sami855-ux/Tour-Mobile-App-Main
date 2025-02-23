@@ -3,5 +3,23 @@
     <string name="Welcome">Welcome To My App</string>
     <string name="login">Login</string>
     <string name="started">Get Started</string>
+    <string name="lalibela">Lalibela, Ethiopia, is famous for its rock-hewn churches, which are considered one of the greatest architectural
+        achievements in the world. A UNESCO World Heritage site, Lalibela is often referred to as the "New Jerusalem" due to its religious significance. The churches, carved from solid rock in the 12th century under King Lalibela, include iconic structures like Bete Giyorgis (Church of St. George), known for its unique cross-shaped design. The site remains an important pilgrimage destination for
+        Ethiopian Orthodox Christians and continues to captivate visitors with its rich history and spiritual atmosphere.
+    </string>
+    <string name="addis">Addis Ababa offers several great places to visit, including the National Museum of Ethiopia, home to the famous fossil "Lucy"; Holy Trinity Cathedral, an important religious and historical site; Entoto Park, which provides stunning panoramic views of the city; Merkato, one of Africa’s
+        largest open-air markets; and Unity Park, a beautifully designed space showcasing Ethiopia’s history, culture, and wildlife.
+    </string>
+    <string name="gonder">Gondar, often called the "Camelot of Africa," is a historic city in northern Ethiopia known for its stunning castles and rich cultural heritage. Once the capital of Ethiopia during the 17th and 18th centuries, Gondar is home to the famous Fasil Ghebbi, a UNESCO World Heritage site featuring a collection of well-preserved royal castles built by Emperor Fasilides and his successors. The city also boasts the Debre Berhan Selassie Church, renowned for its beautifully painted ceiling adorned with angelic faces. Gondar’s history, combined with its
+        breathtaking landscapes and vibrant culture, makes it a must-visit destination for travelers exploring Ethiopia.
+    </string>
+    <string name="axum">Axum, one of Ethiopia’s most ancient and historically significant cities, is known as the center of the Aksumite Empire, one of the great civilizations of the ancient world. A UNESCO World Heritage site, Axum is famous for its towering obelisks (stelae), including the 1,700-year-old Obelisk of Axum, which stands as a symbol of Ethiopia’s rich heritage. The city is also believed to be the final resting place of the Ark of the Covenant, housed in the Church of St. Mary of Zion, a sacred site for Ethiopian Orthodox Christians. With its archaeological wonders, ancient inscriptions,
+        and deep religious significance, Axum remains a must-visit destination for history enthusiasts and pilgrims alike.
+    </string>
+    <string name="bahirdar">Bahir Dar is a stunning city in northwest Ethiopia, beautifully situated along the southern shore of Lake Tana, the country’s largest lake. Known for its breathtaking landscapes and rich history, Bahir Dar is one of Ethiopias top tourist spots.
+
+One of the citys highlights is the magnificent Blue Nile Falls, or Tis Issat, a spectacular waterfall that cascades into the Blue Nile River. Visitors can also explore the enchanting monasteries on Lake Tanahs islands, where ancient religious artifacts and beautiful frescoes are carefully preserved.
+    </string>
+
     <string name="welcom_desc">This tutorial video will show you how to create simple android material Modern Dashboard and login.</string>
 </resources>
