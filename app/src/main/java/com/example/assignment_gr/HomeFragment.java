@@ -163,9 +163,9 @@ public class HomeFragment extends Fragment {
                 "Famous for its rock-hewn churches.",
                 "The main street of Lalibela.",
                 "5",
-                "@drawable/addis.png",
+                "lal1.png",
                 "Lalibela Hotel",
-                "Famous for its rock-hewn churches. A UNESCO World Heritage site."
+                getString(R.string.lalibela)
         ));
 
         locations.add(new Location(
@@ -175,9 +175,9 @@ public class HomeFragment extends Fragment {
                 "The capital city of Ethiopia.",
                 "Bole area with vibrant nightlife.",
                 "4",
-                "@drawable/addis.png",
+                "addis.png",
                 "Sheraton Addis",
-                "The bustling capital with rich culture and history."
+                getString(R.string.addis)
         ));
 
         locations.add(new Location(
@@ -187,9 +187,9 @@ public class HomeFragment extends Fragment {
                 "Known for its medieval castles.",
                 "Historic castles and churches.",
                 "4",
-                "@drawable/gondar.png",
+                "gondar.png",
                 "Goha Hotel",
-                "Home to the famous castles of the Gondar region."
+                getString(R.string.gonder)
         ));
 
         locations.add(new Location(
@@ -199,9 +199,10 @@ public class HomeFragment extends Fragment {
                 "An ancient city known for its obelisks.",
                 "Archaeological sites and ancient churches.",
                 "5",
-                "@drawable/axum.png",
+                "axum.png",
                 "Axum Hotel",
-                "The ruins of ancient civilization and Christianity."
+                getString(R.string.axum)
+
         ));
 
         locations.add(new Location(
@@ -211,9 +212,9 @@ public class HomeFragment extends Fragment {
                 "Situated near Lake Tana, known for its monasteries.",
                 "The waterfront of Lake Tana.",
                 "4",
-                "@drawable/bahir_dar.png",
+                "bahir_dar.png",
                 "Bahir Dar Hotel",
-                "Explore the stunning natural beauty and rich history."
+                getString(R.string.bahirdar)
         ));
 
         locations.add(new Location(
@@ -223,9 +224,9 @@ public class HomeFragment extends Fragment {
                 "A UNESCO World Heritage site with stunning landscapes.",
                 "Treks and views from the mountains.",
                 "5",
-                "@drawable/simien.png",
+                "simien.png",
                 "Simien Lodge",
-                "Home to diverse wildlife and breathtaking views."
+                getString(R.string.lalibela)
         ));
 
         locations.add(new Location(
@@ -235,7 +236,7 @@ public class HomeFragment extends Fragment {
                 "An ancient city with vibrant traditions and mosques.",
                 "The old walled city of Harar.",
                 "4",
-                "@drawable/harar.png",
+                "harar.png",
                 "Ras Hotel",
                 "Known for its history in Islamic culture."
         ));
@@ -247,7 +248,7 @@ public class HomeFragment extends Fragment {
                 "A less-traveled place with unique landscapes.",
                 "Natural beauty with few tourists.",
                 "3",
-                "@drawable/dessalegn.png",
+                "dessalegn.png",
                 "Dessalegn Hotel",
                 "Explore the hidden gems of Ethiopia."
         ));
