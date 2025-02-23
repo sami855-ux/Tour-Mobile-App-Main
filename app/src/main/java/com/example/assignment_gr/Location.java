@@ -11,7 +11,8 @@ public class Location {
     private String HotelAddress;
     private String MainDescription;
 
-    public Location(String name, double latitude, double longitude, String description, String hotelAddress, String rating, String ImageNmame
+    public Location(String name, double latitude, double longitude, String description, String hotelAddress, String rating,
+                    String ImageNmame
     ,String HotelName, String MainDescription) {
         this.name = name;
         this.latitude = latitude;
@@ -19,7 +20,7 @@ public class Location {
         this.description = description;
         this.HotelAddress = hotelAddress;
         this.rating = rating;
-        this.ImageName = ImageName;
+        this.ImageName = ImageNmame;
         this.HotelName = HotelName;
         this.MainDescription = MainDescription;
     }
