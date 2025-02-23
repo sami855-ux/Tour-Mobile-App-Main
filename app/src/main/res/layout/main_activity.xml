@@ -24,36 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="50dp"
-            android:layout_gravity="top"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/search_edit_text"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:hint="Search here..."
-                android:minHeight="48dp"
-                android:padding="12dp"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/search_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/purple_500"
-                android:text="Search"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,12 +40,12 @@
             android:id="@+id/location_list"
             android:layout_width="match_parent"
             android:layout_height="400dp"
+            android:background="@android:color/white"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
-            android:background="@android:color/white"
+            android:fontFamily="@font/poppinsregular"
             android:padding="8dp"
-            android:scrollbars="none"
-            android:fontFamily="@font/poppinsregular"/>
+            android:scrollbars="none" />
 
     </LinearLayout>
 
