@@ -22,8 +22,12 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
+
+
 public class PlacesFragment extends Fragment {
 
     private String name;
@@ -34,10 +38,23 @@ public class PlacesFragment extends Fragment {
     private String HotelName;
     private String HotelAddress;
     private String MainDescription;
+    private dbconnect dbHelper;
+    private static final Map<String, Integer> imageMap = new HashMap<>();
+
+    static {
+        imageMap.put("addis.png", R.drawable.addis);
+        imageMap.put("axum.png", R.drawable.axum);
+        imageMap.put("gondar.png", R.drawable.gonder);
+        imageMap.put("harar", R.drawable.harer);
+        imageMap.put("tana.png", R.drawable.tana);
+        imageMap.put("simien.png", R.drawable.simien);
+        imageMap.put("lal1.png", R.drawable.lal1);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new dbconnect(requireContext());
     }
 
     @Nullable
@@ -45,7 +62,7 @@ public class PlacesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.places, container, false);
         Date currentDate = new Date();
-        dbconnect dbHelper = new dbconnect(requireContext());
+
 
         // Initialize the TextView
         TextView textView = view.findViewById(R.id.countryName);
@@ -54,8 +71,11 @@ public class PlacesFragment extends Fragment {
         TextView mainDesc = view.findViewById(R.id.mainDesc);
         TextView textViewHotelName = view.findViewById(R.id.textViewHotelName);
         TextView textViewHotelDescription = view.findViewById(R.id.textViewHotelDescription);
+        TextView review = view.findViewById(R.id.review);
+        TextView desc = view.findViewById(R.id.descriptions);
         ImageView image = view.findViewById(R.id.imageView1);
         Button book = view.findViewById(R.id.button5);
+
 
         // Get the arguments passed to this fragment
         Bundle arguments = getArguments();
@@ -70,40 +90,34 @@ public class PlacesFragment extends Fragment {
             HotelAddress = arguments.getString("HotelAddress", "");
 
             // For example, display data in a TextView
+            desc.setText("Some Descriptions About " + name);
             textView.setText(name);
             textView1.setText(String.format("%s", lat));
             textView2.setText(String.format("%s", lon));
             mainDesc.setText(MainDescription);
             textViewHotelName.setText(HotelName);
             textViewHotelDescription.setText(HotelAddress);
+            setRatingToFour(view, Integer.parseInt(rating));
 
-            try {
-                // Get the class field dynamically from R.drawable
-                Field field = R.drawable.class.getField(ImageName); // image should be a valid drawable name
-                int imageResId = field.getInt(null);
+            loadImage(image, ImageName);
 
-                // Set the image resource correctly
-                image.setImageResource(imageResId);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
-                image.setImageResource(R.drawable.axum); // Fallback image if not found
+            if(Integer.parseInt(rating) > 3) {
+                review.setText("This place is very good to visit, We recommende it, 👍👍👍👍");
             }
 
-            setRatingToFour(view, Integer.parseInt(rating));
         }
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int userId = getLoggedInUserId(requireContext());
-                if(userId == -1) return;  // Checks if userId is null or empty
-
+                if (userId == -1) return;  // Checks if userId is null or empty
 
                 boolean isAdded = dbHelper.addHotel(userId, HotelName, HotelAddress);
 
-                if(isAdded){
+                if (isAdded) {
                     Toast.makeText(requireContext(), "Hotel added successfully", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Toast.makeText(requireContext(), "Failed to add hotel", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -112,9 +126,17 @@ public class PlacesFragment extends Fragment {
 
     }
 
+    public static void loadImage(ImageView imageView, String key) {
+        if (imageMap.containsKey(key)) {
+            imageView.setImageResource(imageMap.get(key));
+        } else {
+            imageView.setImageResource(R.drawable.danakil);
+        }
+    }
+
     public void setRatingToFour(View view, int number) {
         RatingBar ratingBar = view.findViewById(R.id.ratingBar);
-        ratingBar.setRating(number); // Set the rating to 4 stars
+        ratingBar.setRating(number);
     }
 
     public int getLoggedInUserId(Context context) {
