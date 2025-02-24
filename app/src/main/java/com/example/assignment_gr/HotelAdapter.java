@@ -9,34 +9,37 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class HotelAdapter extends ArrayAdapter<String> {
-
+public class HotelAdapter extends ArrayAdapter<Hotel> {
     private Context context;
-    private List<String> hotelLocations;
+    private List<Hotel> hotels;
+    private LayoutInflater inflater;
 
     // Constructor
-    public HotelAdapter(Context context, List<String> hotelLocations) {
-        super(context, 0, hotelLocations);
+    public HotelAdapter(Context context, List<Hotel> hotels) {
+        super(context, 0, hotels);
         this.context = context;
-        this.hotelLocations = hotelLocations;
+        this.hotels = hotels;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the hotel location for the current position
-        String hotelLocation = hotelLocations.get(position);
-
-        // Check if an existing view is being reused, otherwise inflate a new view
+        // Reuse view if possible
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_location, parent, false);
+            convertView = inflater.inflate(R.layout.list_item_hotel, parent, false);
         }
 
-        // Find the TextView in the list item layout and set the text
-        TextView locationNameTextView = convertView.findViewById(R.id.location_name);
-        locationNameTextView.setText(hotelLocation);
+        // Get the current hotel item
+        Hotel hotel = hotels.get(position);
+
+        // Find TextViews
+        TextView hotelNameText = convertView.findViewById(R.id.hotelName);
+        TextView positionNameText = convertView.findViewById(R.id.positionName);
+
+        // Set data
+        hotelNameText.setText(hotel.getHotelName());
+        positionNameText.setText(hotel.getPositionName());
 
         return convertView;
     }
 }
-
-

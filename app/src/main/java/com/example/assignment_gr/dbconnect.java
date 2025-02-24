@@ -6,8 +6,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class dbconnect extends SQLiteOpenHelper {
 
@@ -58,23 +62,76 @@ public class dbconnect extends SQLiteOpenHelper {
 
     // Add a new hotel for a user
     public boolean addHotel(int userId, String hotelName, String positionName) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(userIdFk, userId);  // Link hotel to user by userId
-        values.put(hotelName, hotelName);
-        values.put(positionName, positionName);
+        // Check for valid inputs
+        if (userId <= 0) {
+            Log.e("ADD_HOTEL_ERROR", "Invalid input data. User ID: "
+                    + userId + ", Hotel Name: " + hotelName + ", Position Name: "
+                    + positionName);
+            return false;
+        }
 
-        long result = db.insert(hotelTable, null, values);
-        db.close();
-        return result != -1;  // Return true if insertion is successful
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+
+            // Check if the user exists
+            Cursor cursor = db.rawQuery("SELECT * FROM " + tablename + " WHERE " + id + " = ?", new String[]{String.valueOf(userId)});
+            boolean userExists = cursor.moveToFirst();
+            cursor.close();
+
+            if (!userExists) {
+                Log.e("ADD_HOTEL_ERROR", "User ID does not exist: " + userId);
+                return false; // User does not exist
+            }
+
+            // Insert the hotel
+            ContentValues values = new ContentValues();
+            values.put(userIdFk, userId);
+            values.put(hotelName, hotelName);
+            values.put(positionName, positionName);
+
+            long result = db.insert(hotelTable, null, values);
+
+            if (result == -1) {
+                Log.e("ADD_HOTEL_ERROR", "Failed to insert hotel. User ID: " + userId + ", Hotel Name: " + hotelName + ", Position Name: " + positionName);
+                return false; // Insertion failed
+            }
+
+            return true;
+        } catch (Exception e) {
+            Log.e("ADD_HOTEL_ERROR", "Exception occurred while adding hotel: " + e.getMessage());
+            return false;
+        } finally {
+            if (db != null && db.isOpen()) {
+                db.close(); // Ensure database connection is closed
+            }
+        }
     }
 
     // List all hotels for a specific user
-    public Cursor getHotelsForUser(int userId) {
+    public List<Hotel> getHotelsListForUser(int userId) {
+        List<Hotel> hotelsList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + hotelTable + " WHERE " + userIdFk + " = ?";
-        return db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int hotelNameIndex = cursor.getColumnIndex("hotelName"); // Adjust column names
+                int positionNameIndex = cursor.getColumnIndex("positionName");
+
+                String hotelName = cursor.getString(hotelNameIndex);
+                String positionName = cursor.getString(positionNameIndex);
+
+                hotelsList.add(new Hotel(hotelName, positionName)); // Store as Hotel object
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return hotelsList;
     }
+
 
     public boolean addUser(User user) {
         SQLiteDatabase db = null;

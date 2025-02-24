@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment {
     private ListView listView;
     private ArrayList<Location> locations;
     private LocationAdapter adapter;
-    private LocationDetailHelper dbHelper;
 
     @Nullable
     @Override
@@ -45,6 +44,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.main_activity, container, false);
 
         Configuration.getInstance().load(getContext(), PreferenceManager.getDefaultSharedPreferences(getContext()));
+
         // Initialize ListView
         listView = view.findViewById(R.id.location_list);
         locations = new ArrayList<>();
@@ -55,7 +55,6 @@ public class HomeFragment extends Fragment {
         // Set up the adapter and ListView
         adapter = new LocationAdapter(requireContext(), locations);
         listView.setAdapter(adapter);
-
 
         mapView = view.findViewById(R.id.osm_map);
         mapView.setMultiTouchControls(true);
@@ -504,34 +503,5 @@ public class HomeFragment extends Fragment {
                 "Lalibela Hotel",
                 "Famous for its rock-hewn churches."
         ));
-    }
-
-
-    public void AddPlacesDetail() {
-
-        addDetails("Lalibela", "Amhara", "Famous for its rock-hewn churches.", 5, "Best Hotel", "Amhara Street", "Luxury hotel");
-    }
-
-    public void addDetails(String place_name, String address, String description, Integer rating, String hotel_name, String hotel_address, String hotel_description) {
-        // Ensure dbHelper is initialized
-        // Create a new LocationDetail object
-        LocationDetail newLocation = new LocationDetail(
-                "Eiffel Tower",
-                "France",
-                "A wrought iron lattice tower on the Champ de Mars."
-        );
-
-        // Save the new location to the database
-        if (dbHelper == null) {
-            dbHelper = new LocationDetailHelper(requireContext());
-        }
-        Boolean result = dbHelper.addLocation(newLocation);
-
-        if (result) {
-            Toast.makeText(requireContext(), "Location added successfully!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(requireContext(), "Failed to add location.", Toast.LENGTH_SHORT).show();
-        }
-
     }
 }

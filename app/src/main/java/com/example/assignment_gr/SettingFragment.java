@@ -27,7 +27,6 @@ public class SettingFragment extends Fragment {
     private TextView username, userEmail, userLocation;
     private dbconnect dbHelper;
     private  SessionManager sessionManager;
-    private Integer userId;
     public User user;
     private ListView hotelListView;
     @Nullable
@@ -38,24 +37,26 @@ public class SettingFragment extends Fragment {
         btnDelete = view.findViewById(R.id.deleteaccount);
         btnEdit = view.findViewById(R.id.editprofile);
 
+        int userId = getLoggedInUserId(requireContext());
+        dbHelper = new dbconnect(requireContext());
+
         username = view.findViewById(R.id.username);
         userEmail = view.findViewById(R.id.userEmail);
         userLocation = view.findViewById(R.id.userLocation);
-        // Initialize the ListView
-        hotelListView = view.findViewById(R.id.hotel_list_view); // Assuming the ListView has this ID in activity_hotel_list.xml
+        hotelListView = view.findViewById(R.id.hotel_list_view);
 
-        // Sample list of hotel locations
-        List<String> hotelLocations = new ArrayList<>();
+        List<Hotel> hotels = dbHelper.getHotelsListForUser(userId);
 
-        HotelAdapter hotelAdapter = new HotelAdapter(getContext(), hotelLocations);
+        HotelAdapter hotelAdapter = new HotelAdapter(requireContext(), hotels);
         hotelListView.setAdapter(hotelAdapter);
 
-        int userId = getLoggedInUserId(requireContext());
+
 
         if (userId != -1) { // Check if a valid user ID was found
             dbconnect dbHelper = new dbconnect(requireContext());
             user = dbHelper.getUserById(userId);
         }
+
         username.setText(String.valueOf(user.getUsername()));
         userEmail.setText(String.valueOf(user.getEmail()));
 

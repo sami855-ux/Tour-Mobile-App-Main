@@ -61,7 +61,6 @@ public class PlacesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.places, container, false);
-        Date currentDate = new Date();
 
 
         // Initialize the TextView
@@ -101,7 +100,7 @@ public class PlacesFragment extends Fragment {
 
             loadImage(image, ImageName);
 
-            if(Integer.parseInt(rating) > 3) {
+            if(Integer.parseInt(rating) > 4) {
                 review.setText("This place is very good to visit, We recommende it, 👍👍👍👍");
             }
 
@@ -111,14 +110,23 @@ public class PlacesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int userId = getLoggedInUserId(requireContext());
-                if (userId == -1) return;  // Checks if userId is null or empty
+                if (userId != -1) {
+                    dbconnect dbHelper = new dbconnect(requireContext());
 
-                boolean isAdded = dbHelper.addHotel(userId, HotelName, HotelAddress);
+                    Log.d("HotelFragment", "User ID: " + userId + " "+ HotelAddress + " " + HotelName);
 
-                if (isAdded) {
-                    Toast.makeText(requireContext(), "Hotel added successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(requireContext(), "Failed to add hotel", Toast.LENGTH_SHORT).show();
+                    if(HotelName == null || HotelName.isEmpty() || HotelAddress == null || HotelAddress.isEmpty()) {
+                        Log.d("HotelFragment", "Hotel name or address is empty");
+                        return;
+                    }
+
+                    boolean isAdded = dbHelper.addHotel(userId, HotelName, HotelAddress);
+
+                    if (isAdded) {
+                        Toast.makeText(requireContext(), "Hotel added successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to add hotel", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
